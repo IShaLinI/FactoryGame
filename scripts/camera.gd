@@ -15,7 +15,6 @@ func _input(event):
 	#Handle Zoom
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			zoom
 			emit_signal("change_grid_zoom", 0.1)
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			emit_signal("change_grid_zoom", -0.1)
@@ -36,8 +35,4 @@ func _input(event):
 	mousePos = newMousePos
 	
 	emit_signal("redraw_grid")
-	pass
-
-func _process(delta):
-	
 	pass
