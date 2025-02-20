@@ -37,6 +37,8 @@ func _ready():
 	atlas_source.create_tile(Vector2i(3,0))
 	tileset.add_source(atlas_source,0)
 	
+	
+	item_list.focus_mode = FocusMode.FOCUS_NONE
 	item_list.add_icon_item(atlas_to_texture2d(get_tile_texture(Vector2i(2,0),0)))
 	item_list.add_icon_item(atlas_to_texture2d(get_tile_texture(Vector2i(3,0),0)))
 	
@@ -44,14 +46,7 @@ func _ready():
 	
 func _process(delta):
 	
-	var standard_container_size = Vector2(800,144)
-	
-	print("Camera Zoom:" + str(camera.zoom))
-	print("Container Size" + str(ui_container.size))
-	
 	ui_container.scale = Vector2(4,4) / camera.zoom
-	
-	#item_list.icon_scale = 6 / camera.zoom.x
-	#ui_container.set_size(standard_container_size/camera.zoom)
+	ui_container.position.y = snapped(256 / camera.zoom.x, 0.5)
 	
 	pass

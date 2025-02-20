@@ -33,11 +33,18 @@ scale = Vector2(0.035, 0.035)
 texture = ExtResource("2_y8jgr")
 
 [node name="PanelContainer" type="PanelContainer" parent="Camera"]
-offset_left = -100.0
-offset_top = 56.0
-offset_right = 100.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = 64.0
+offset_right = 50.0
 offset_bottom = 92.0
-pivot_offset = Vector2(100, 0)
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(50, 0)
 
 [node name="Tiles" type="ItemList" parent="Camera/PanelContainer"]
 z_index = 1
@@ -45,7 +52,6 @@ layout_mode = 2
 allow_search = false
 auto_height = true
 max_columns = 2
-icon_scale = 1.5
 script = ExtResource("3_hpmsn")
 
 [node name="Grids" type="Node" parent="."]
