@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://gy25u6l0ufqn" path="res://assets/TileMap.png" id="1_lrikw"]
 [ext_resource type="Script" path="res://scripts/world_grid.gd" id="2_p71fl"]
 [ext_resource type="Texture2D" uid="uid://bftlgfwdcmw1j" path="res://assets/crosshair.png" id="2_y8jgr"]
-[ext_resource type="Script" path="res://scripts/tiles.gd" id="3_hpmsn"]
+[ext_resource type="Script" path="res://scripts/tile_place_gui.gd" id="3_hpmsn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c8lvm"]
 texture = ExtResource("1_lrikw")
@@ -24,12 +24,11 @@ sources/0 = SubResource("TileSetAtlasSource_c8lvm")
 [node name="Game" type="Node2D"]
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
 script = ExtResource("1_ec15k")
 
 [node name="Camera Crosshair" type="Sprite2D" parent="Camera"]
+visible = false
 z_index = 2
-scale = Vector2(0.035, 0.035)
 texture = ExtResource("2_y8jgr")
 
 [node name="PanelContainer" type="PanelContainer" parent="Camera"]
@@ -39,9 +38,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -50.0
-offset_top = 64.0
+offset_top = 250.0
 offset_right = 50.0
-offset_bottom = 92.0
+offset_bottom = 278.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(50, 0)
@@ -58,6 +57,7 @@ script = ExtResource("3_hpmsn")
 
 [node name="WorldGrid" type="TileMapLayer" parent="Grids"]
 z_index = -1
+scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_crioc")
 script = ExtResource("2_p71fl")
 
