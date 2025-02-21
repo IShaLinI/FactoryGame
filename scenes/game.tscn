@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjh2yh401nabx"]
+[gd_scene load_steps=9 format=3 uid="uid://cjh2yh401nabx"]
 
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_ec15k"]
 [ext_resource type="Texture2D" uid="uid://gy25u6l0ufqn" path="res://assets/TileMap.png" id="1_lrikw"]
 [ext_resource type="Script" path="res://scripts/world_grid.gd" id="2_p71fl"]
 [ext_resource type="Texture2D" uid="uid://bftlgfwdcmw1j" path="res://assets/crosshair.png" id="2_y8jgr"]
 [ext_resource type="Script" path="res://scripts/tile_place_gui.gd" id="3_hpmsn"]
+[ext_resource type="Script" path="res://scripts/player_tiles.gd" id="6_cwdwo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c8lvm"]
 texture = ExtResource("1_lrikw")
@@ -31,7 +32,7 @@ visible = false
 z_index = 2
 texture = ExtResource("2_y8jgr")
 
-[node name="PanelContainer" type="PanelContainer" parent="Camera"]
+[node name="UI" type="PanelContainer" parent="Camera"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -45,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(50, 0)
 
-[node name="Tiles" type="ItemList" parent="Camera/PanelContainer"]
+[node name="Placables" type="ItemList" parent="Camera/UI"]
 z_index = 1
 layout_mode = 2
 allow_search = false
@@ -53,15 +54,18 @@ auto_height = true
 max_columns = 2
 script = ExtResource("3_hpmsn")
 
-[node name="Grids" type="Node" parent="."]
-
-[node name="WorldGrid" type="TileMapLayer" parent="Grids"]
+[node name="WorldGrid" type="TileMapLayer" parent="."]
 z_index = -1
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_crioc")
 script = ExtResource("2_p71fl")
 
-[node name="Buildables" type="TileMapLayer" parent="Grids"]
+[node name="PlayerTiles" type="TileMapLayer" parent="WorldGrid"]
+tile_set = SubResource("TileSet_crioc")
+script = ExtResource("6_cwdwo")
+
+[node name="Map" type="TileMapLayer" parent="WorldGrid"]
+tile_map_data = PackedByteArray(0, 0, 4, 0, 252, 255, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_crioc")
 
-[connection signal="ready" from="Grids/WorldGrid" to="Grids/WorldGrid" method="_on_ready"]
+[connection signal="ready" from="WorldGrid" to="WorldGrid" method="_on_ready"]

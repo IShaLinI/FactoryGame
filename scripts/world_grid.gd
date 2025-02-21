@@ -1,12 +1,12 @@
 extends TileMapLayer
 
-@onready var camera = $"../../Camera"
+@onready var camera = $"../Camera"
 @onready var grid = $"."
 
 var zoom = 4
 
 func getTileAtCoord(coord: Vector2):
-	return Vector2i(floor(coord.x/(16 * zoom)), floor(coord.y/(16 * zoom)))
+	return Vector2i(round(coord.x/(16 * zoom)), round(coord.y/(16 * zoom)))
 
 #Draw placement grid squares around camera
 func redraw():

@@ -4,7 +4,6 @@ extends ItemList
 @onready var ui_container = $".."
 @onready var item_list = $"."
 
-
 var tileset = TileSet.new()
 
 func get_tile_texture(coords: Vector2i, source_id: int = 0) -> AtlasTexture:
@@ -38,10 +37,12 @@ func _ready():
 	tileset.add_source(atlas_source,0)
 	
 	ui_container.scale = Vector2(4,4)
-	
+
 	item_list.icon_scale = 1
 	item_list.focus_mode = FocusMode.FOCUS_NONE
 	item_list.add_icon_item(atlas_to_texture2d(get_tile_texture(Vector2i(2,0),0)))
 	item_list.add_icon_item(atlas_to_texture2d(get_tile_texture(Vector2i(3,0),0)))
+	
+	item_list.select(0)
 	
 	pass
