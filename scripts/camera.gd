@@ -1,23 +1,30 @@
 extends Camera2D
 
-signal redraw_grid()
-signal change_grid_zoom(increment : float)
-
 @onready var mousePos = get_viewport().get_mouse_position()
 @onready var newMousePos = get_viewport().get_mouse_position()
-@onready var camera = $"."
 
 var dragging = false
 var scrolling = false
 
+signal redraw_grid()
+signal handle_hover()
+signal change_zoom(amount: float)
+
+var accum_pivot = Vector2(0,0)
+var zoom_value = 4
+
 func _input(event):
-	
+
 	#Handle Zoom
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			emit_signal("change_grid_zoom", 0.1)
+			zoom_value = round(clamp(zoom_value + 0.1, 1, 8) * 10)/10
+			change_zoom.emit(0.1)
+			print("Zoom:", zoom_value)
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			emit_signal("change_grid_zoom", -0.1)
+			zoom_value = round(clamp(zoom_value - 0.1, 1, 8) * 10)/10
+			change_zoom.emit(-0.1)
+			print("Zoom:", zoom_value)
 		
 	#Handle Camera Pan
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
@@ -30,9 +37,15 @@ func _input(event):
 	if (dragging):
 		newMousePos = get_viewport().get_mouse_position()
 		var mouseDelta = newMousePos - mousePos
-		camera.position = camera.position - (mouseDelta)/zoom.x
-		
+		position = position - mouseDelta
+		var distance_to_pivot = accum_pivot - position
+
+		if (abs(distance_to_pivot.x) > 16 * zoom_value || abs(distance_to_pivot.y) > 16 * zoom_value):
+			accum_pivot = position
+			redraw_grid.emit()
+
 	mousePos = newMousePos
+
+	handle_hover.emit()
 	
-	emit_signal("redraw_grid")
 	pass

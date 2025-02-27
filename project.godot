@@ -10,18 +10,17 @@ config_version=5
 
 [application]
 
-config/name="Factory Game"
+config/name="FactoryGameRefactor"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1280
+window/size/viewport_width=1024
 window/size/viewport_height=768
 window/size/resizable=false
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.165161, 0.222688, 0.306154, 1)
